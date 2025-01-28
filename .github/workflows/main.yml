@@ -50,7 +50,7 @@ jobs:
   deployment:
     name: Stage2Deployment
     needs: testing
-    runs-on: [self-hosted, DESKTOP-EQPVP6B]
+    runs-on: self-hosted
 
     steps:
       - name: Checkout Code
