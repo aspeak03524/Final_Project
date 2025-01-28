@@ -9,7 +9,7 @@ on:
 jobs:
   testing:
     name: Stage1Testing
-    runs-on: ubuntu-latest
+    runs-on: DESKTOP-EQPVP6B
 
     steps:
       - name: Checkout Code
