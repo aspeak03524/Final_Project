@@ -76,11 +76,8 @@ jobs:
           echo "Destroying infrastructure because Terraform apply failed..."
           terraform destroy -auto-approve
 
-      - name: Describe EKS Cluster
-        id: eks_status
-        run: |
-          aws eks describe-cluster --name andrew-cluster --region eu-west-1
-        continue-on-error: true 
+      - name: Update kubeconfig for EKS Cluster
+        run: aws eks --region eu-south-2 update-kubeconfig --name andrew-cluster1
 
       - name: Terraform Destroy
         if: failure()  # Runs only if the previous step failed
