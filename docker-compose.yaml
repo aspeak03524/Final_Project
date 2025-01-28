@@ -1,0 +1,70 @@
+version: '3.9'
+
+services:
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    networks:
+      - expensy-network
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
+    ports:
+      - "27017:27017"
+    #volumes:
+      #mongo_data:/data/db
+    
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    networks:
+      - expensy-network
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+
+  backend:
+    image: aspeak03524/expensy_backend:latest
+    container_name: expensy_backend
+    networks:
+      - expensy-network
+    depends_on:
+      - mongodb
+      - redis
+    environment:
+      DATABASE_URI: mongodb://root:example@mongodb:27017
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: someredispasswordd
+    ports:
+      - "8706:8706"
+
+
+  frontend:
+    
+    image: aspeak03524/final_project:frontend-latest
+    container_name: expensy_frontend
+    networks:
+      - expensy-network
+    depends_on:
+      - backend
+    environment:
+      API_URL: "http://expensy_backend:8706"
+    ports:
+      - "3000:3000"
+
+
+
+networks:
+  expensy-network:
+    driver: bridge
+
+volumes:
+  mongo_data:
+    #driver: local
+  redis_data:
+    #driver: local
