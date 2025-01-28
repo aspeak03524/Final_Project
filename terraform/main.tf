@@ -42,7 +42,7 @@ resource "aws_route_table_association" "public_subnet_2_assoc" {
 }
 
 resource "aws_iam_role" "eks_role" {
-  name = "andrew-role4"
+  name = "andrew-role14"
   assume_role_policy = jsonencode({
     Statement = [{
       Action = "sts:AssumeRole"
@@ -65,7 +65,7 @@ resource "aws_iam_role_policy_attachment" "cluster_attach_2" {
 }
 
 resource "aws_eks_cluster" "expense_tracker" {
-  name     = "andrew-cluster"
+  name     = "andrew-cluster1"
   role_arn = aws_iam_role.eks_role.arn
   
   vpc_config {
@@ -81,7 +81,7 @@ resource "aws_eks_cluster" "expense_tracker" {
 }
 
 resource "aws_iam_role" "eks_nodegroup_role" {
-  name = "andrew-4"
+  name = "andrew-14"
   assume_role_policy = jsonencode({
     Statement = [
       {
