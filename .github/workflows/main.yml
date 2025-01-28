@@ -32,6 +32,9 @@ jobs:
       - name: Run Docker Compose
         run: |
           docker-compose -f ./docker-compose.yaml up -d
+        
+      - name: Install curl
+        run: sudo apt-get install -y curl
 
 
       - name: Test Container Connections
