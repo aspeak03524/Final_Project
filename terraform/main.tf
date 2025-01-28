@@ -42,7 +42,7 @@ resource "aws_route_table_association" "public_subnet_2_assoc" {
 }
 
 resource "aws_iam_role" "eks_role" {
-  name = "andrew-role3"
+  name = "andrew-role4"
   assume_role_policy = jsonencode({
     Statement = [{
       Action = "sts:AssumeRole"
@@ -81,7 +81,7 @@ resource "aws_eks_cluster" "expense_tracker" {
 }
 
 resource "aws_iam_role" "eks_nodegroup_role" {
-  name = "andrew-3"
+  name = "andrew-4"
   assume_role_policy = jsonencode({
     Statement = [
       {
