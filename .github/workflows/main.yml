@@ -7,7 +7,7 @@ on:
 
 jobs:
   testing:
-    name: Stage 1: Testing
+    name: Stage1Testing
     runs-on: ubuntu-latest
 
     steps:
@@ -40,7 +40,7 @@ jobs:
           docker-compose down
 
   deployment:
-    name: Stage 2: Deployment
+    name: Stage2Deployment
     needs: testing
     runs-on: ubuntu-latest
 
