@@ -70,6 +70,12 @@ jobs:
           terraform apply -auto-approve
         working-directory: ./terraform
 
+      - name: Terraform Destroy
+        if: failure()  # Runs only if the previous step failed
+        run: |
+          echo "Destroying infrastructure because Terraform apply failed..."
+          terraform destroy -auto-approve
+
       - name: Apply Kubernetes Manifest
         run: |
           kubectl apply -f ./cluster-manifest.yaml
