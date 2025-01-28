@@ -39,9 +39,9 @@ jobs:
       - name: Test Container Connections
         run: |
           # Custom script to test connections between containers in Docker Compose
-          docker exec mongodb wget -qO- http://redis:6379
-          docker exec redis wget -qO- http://expensy_backend:8706
-          docker exec expensy_backend wget -qO- http://expensy_frontend:3000
+          docker exec mongodb curl -s http://redis:6379
+          docker exec redis curl -s http://expensy_backend:8706
+          docker exec expensy_backend curl -s http://expensy_frontend:3000
 
 
       - name: Tear Down Docker Containers
