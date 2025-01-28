@@ -36,10 +36,10 @@ jobs:
 
       - name: Test Container Connections
         run: |
-          # Custom script to test connections between containers
-          docker exec container1 curl -s http://container2:port
-          docker exec container2 curl -s http://container3:port
-          docker exec container3 curl -s http://container4:port
+          # Custom script to test connections between containers in Docker Compose
+          docker exec mongodb curl -s http://redis:6379
+          docker exec redis curl -s http://expensy_backend:8706
+          docker exec expensy_backend curl -s http://expensy_frontend:3000
 
       - name: Tear Down Docker Containers
         if: success()
