@@ -76,11 +76,35 @@ jobs:
           echo "Destroying infrastructure because Terraform apply failed..."
           terraform destroy -auto-approve
 
+      - name: Describe EKS Cluster
+        id: eks_status
+        run: |
+          aws eks describe-cluster --name andrew-cluster --region eu-west-1
+        continue-on-error: true 
+
+      - name: Terraform Destroy
+        if: failure()  # Runs only if the previous step failed
+        run: |
+          echo "Destroying infrastructure because Terraform apply failed..."
+          terraform destroy -auto-approve
+
       - name: Apply Kubernetes Manifest
         run: |
           kubectl apply -f ./cluster-manifest.yaml
+
+      - name: Terraform Destroy
+        if: failure()  # Runs only if the previous step failed
+        run: |
+          echo "Destroying infrastructure because Terraform apply failed..."
+          terraform destroy -auto-approve
 
       - name: Check if all containers are running
         run: |
           # List all running containers to check their status
           docker ps --filter "status=running"
+
+      - name: Terraform Destroy
+        if: failure()  # Runs only if the previous step failed
+        run: |
+          echo "Destroying infrastructure because Terraform apply failed..."
+          terraform destroy -auto-approve
