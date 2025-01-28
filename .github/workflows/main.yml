@@ -1,3 +1,4 @@
+
 name: CI/CD Pipeline
 
 on:
@@ -62,4 +63,12 @@ jobs:
           terraform apply -auto-approve
         working-directory: ./terraform
 
-      - name: Apply 
+      - name: Apply Kubernetes Manifest
+        run: |
+          kubectl apply -f ./cluster-manifest.yaml
+
+      - name: Test Kubernetes Deployments
+        run: |
+          kubectl exec pod1 -- curl -s http://pod2:port
+          kubectl exec pod2 -- curl -s http://pod3:port
+          kubectl exec pod3 -- curl -s http://pod4:port
