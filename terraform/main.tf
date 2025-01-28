@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "eu-west-2"
+  region = "eu-west-1"
 }
 
 resource "aws_vpc" "eks_vpc" {
@@ -13,13 +13,13 @@ resource "aws_internet_gateway" "igw" {
 resource "aws_subnet" "public_subnet_1" {
   vpc_id                  = aws_vpc.eks_vpc.id
   cidr_block              = "10.0.1.0/24"
-  availability_zone       = "eu-west-2a"
+  availability_zone       = "eu-west-1a"
   map_public_ip_on_launch = true
 }
 resource "aws_subnet" "public_subnet_2" {
   vpc_id                  = aws_vpc.eks_vpc.id
   cidr_block              = "10.0.2.0/24"
-  availability_zone       = "eu-west-2b"
+  availability_zone       = "eu-west-1b"
   map_public_ip_on_launch = true
 }
 
@@ -42,7 +42,7 @@ resource "aws_route_table_association" "public_subnet_2_assoc" {
 }
 
 resource "aws_iam_role" "eks_role" {
-  name = "andrew-cluster-role3"
+  name = "andrew-role3"
   assume_role_policy = jsonencode({
     Statement = [{
       Action = "sts:AssumeRole"
@@ -81,7 +81,7 @@ resource "aws_eks_cluster" "expense_tracker" {
 }
 
 resource "aws_iam_role" "eks_nodegroup_role" {
-  name = "andrew-nodegroup-3"
+  name = "andrew-3"
   assume_role_policy = jsonencode({
     Statement = [
       {
