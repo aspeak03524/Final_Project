@@ -95,10 +95,19 @@ jobs:
           echo "Destroying infrastructure because Terraform apply failed..."
           terraform destroy -auto-approve
 
-      - name: Check if all containers are running
+      - name: Check if all Kubernetes pods are running
         run: |
-          # List all running containers to check their status
-          docker ps --filter "status=running"
+          # Get the status of all pods in all namespaces
+          kubectl get pods --all-namespaces
+    
+          # Check if any pod is NOT in Running state
+          if kubectl get pods --all-namespaces --no-headers | grep -v "Running"; then
+          echo "Some pods are not running."
+          exit 1
+          else
+          echo "All pods are running."
+          fi
+
 
       - name: Terraform Destroy
         if: failure()  # Runs only if the previous step failed
