@@ -60,10 +60,10 @@ jobs:
         run: |
           echo "Using self-hosted runner on local machine."
 
-       #name: Run Terraform Init
-        #run: |
-          #terraform init
-        #working-directory: ./terraform
+      - name: Run Terraform Init
+        run: |
+          terraform init
+        working-directory: ./terraform
 
       - name: Run Terraform Apply
         run: |
