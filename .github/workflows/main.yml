@@ -60,10 +60,10 @@ jobs:
         run: |
           echo "Using self-hosted runner on local machine."
 
-      - name: Run Terraform Init
-        run: |
-          terraform init
-        working-directory: ./terraform
+       #name: Run Terraform Init
+        #run: |
+          #terraform init
+        #working-directory: ./terraform
 
       - name: Run Terraform Apply
         run: |
@@ -77,7 +77,7 @@ jobs:
           terraform destroy -auto-approve
 
       - name: Update kubeconfig for EKS Cluster
-        run: aws eks --region eu-south-2 update-kubeconfig --name andrew-cluster1
+        run: aws eks --region eu-south-2 update-kubeconfig --name andrew-cluster5
 
       - name: Terraform Destroy
         if: failure()  # Runs only if the previous step failed
