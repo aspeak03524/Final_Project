@@ -75,7 +75,7 @@ jobs:
           terraform destroy -auto-approve
 
       - name: Update kubeconfig for EKS Cluster
-        run: aws eks --region eu-south-2 update-kubeconfig --name andrew-cluster6
+        run: aws eks --region eu-south-2 update-kubeconfig --name andrew-cluster9
 
       - name: Terraform Destroy
         if: failure()  # Runs only if the previous step failed
