@@ -46,7 +46,7 @@ jobs:
   deployment:
     name: Stage2Deployment
     needs: testing
-    runs-on: ubuntu-latest  # Change this to ubuntu-latest for Ubuntu runner
+    runs-on: self-hosted
 
     steps:
       - name: Checkout Code
