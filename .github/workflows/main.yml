@@ -80,7 +80,7 @@ jobs:
 
       - name: Update kubeconfig for EKS Cluster
         run: |
-          aws eks --region eu-south-2 update-kubeconfig --name andrew-cluster9
+          aws eks --region eu-south-2 update-kubeconfig --name andrew-cluster10
 
       - name: Apply Kubernetes Manifest
         run: |
